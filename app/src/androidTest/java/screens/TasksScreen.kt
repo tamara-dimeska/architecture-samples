@@ -24,6 +24,18 @@ class TasksScreen(semanticsProvider: SemanticsNodeInteractionsProvider) :
     }
 
     val checkboxButton: KNode = child {
-        hasContentDescription("checkbox_button")
+        hasTestTag("checkbox_button")
+    }
+
+    val moreMenuButton: KNode = child {
+        hasTestTag("more_menu")
+    }
+
+    val clearCompletedButton: KNode = child {
+        hasText(this@TasksScreen.targetContext.resources.getString(R.string.menu_clear))
+    }
+
+    val noTasksImage: KNode = child {
+        hasContentDescription(this@TasksScreen.targetContext.resources.getString(R.string.no_tasks_image_content_description))
     }
 }

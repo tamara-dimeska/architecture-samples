@@ -21,47 +21,66 @@ class AddNewTaskUITests : TestCase(
     @get:Rule
     val composeTestRule = createAndroidComposeRule<TasksActivity>()
 
-    @Test
-    fun test_successfully_adding_a_task() = run {
-        val randomString = generateRandomString(length = 6)
-
-        step("Open add new task") {
-            ComposeScreen.onComposeScreen<TasksScreen>(composeTestRule) {
-                addTaskButton {
-                    performClick()
-                }
-            }
-        }
-        step("Fill in Title") {
-            ComposeScreen.onComposeScreen<NewTaskScreen>(composeTestRule) {
-                titleField {
-                    performTextInput("Add new task UI test $randomString")
-                }
-            }
-        }
-        step("Fill in Description") {
-            ComposeScreen.onComposeScreen<NewTaskScreen>(composeTestRule) {
-                descriptionField {
-                    performTextInput("Description for the new task.")
-                }
-            }
-        }
-        step("Tap Save button") {
-            ComposeScreen.onComposeScreen<NewTaskScreen>(composeTestRule) {
-                saveTaskButton {
-                    performClick()
-                }
-            }
-        }
-        step("Check if the task is displayed in the list") {
-            ComposeScreen.onComposeScreen<TasksScreen>(composeTestRule) {
-                getTaskWithText("Add new task UI test $randomString").assertIsDisplayed()
+    private fun openAddNewTask() {
+        ComposeScreen.onComposeScreen<TasksScreen>(composeTestRule) {
+            addTaskButton {
+                performClick()
             }
         }
     }
 
     @Test
-    fun test_error_message_is_displayed_when_title_body_are_missing() = run {
+    fun test_successfully_adding_a_task() =
+        before {
+            openAddNewTask()
+        }.after {
+            ComposeScreen.onComposeScreen<TasksScreen>(composeTestRule) {
+                checkboxButton {
+                    performClick()
+                }
+                moreMenuButton {
+                    performClick()
+                }
+                clearCompletedButton {
+                    performClick()
+                }
+                noTasksImage {
+                    assertIsDisplayed()
+                }
+            }
+        }.run {
+            val randomString = generateRandomString(length = 6)
 
+            step("Fill in Title") {
+                ComposeScreen.onComposeScreen<NewTaskScreen>(composeTestRule) {
+                    titleField {
+                        performTextInput("Add new task UI test $randomString")
+                    }
+                }
+            }
+            step("Fill in Description") {
+                ComposeScreen.onComposeScreen<NewTaskScreen>(composeTestRule) {
+                    descriptionField {
+                        performTextInput("Description for the new task.")
+                    }
+                }
+            }
+            step("Tap Save button") {
+                ComposeScreen.onComposeScreen<NewTaskScreen>(composeTestRule) {
+                    saveTaskButton {
+                        performClick()
+                    }
+                }
+            }
+            step("Check if the task is displayed in the list") {
+                ComposeScreen.onComposeScreen<TasksScreen>(composeTestRule) {
+                    getTaskWithText("Add new task UI test $randomString").assertIsDisplayed()
+                }
+            }
+        }
+
+    @Test
+    fun test_error_message_is_displayed_when_title_body_are_missing() = run {
+//        step("")
     }
 }

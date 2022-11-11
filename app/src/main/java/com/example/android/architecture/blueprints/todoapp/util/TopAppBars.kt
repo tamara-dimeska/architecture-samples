@@ -42,6 +42,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.android.architecture.blueprints.todoapp.R
 import com.google.accompanist.appcompattheme.AppCompatTheme
@@ -103,7 +105,11 @@ private fun MoreTasksMenu(
 ) {
     TopAppBarDropdownMenu(
         iconContent = {
-            Icon(Icons.Filled.MoreVert, stringResource(id = R.string.menu_more))
+//            Icon()
+            Icon(
+                imageVector = Icons.Filled.MoreVert, stringResource(id = R.string.menu_more),
+                modifier = Modifier.semantics { testTag = "more_menu" }
+            )
         }
     ) { closeMenu ->
         DropdownMenuItem(onClick = { onClearCompletedTasks(); closeMenu() }) {
