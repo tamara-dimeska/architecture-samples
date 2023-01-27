@@ -4,38 +4,63 @@ import android.content.Context
 import androidx.compose.ui.test.SemanticsNodeInteractionsProvider
 import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasText
+import androidx.compose.ui.test.junit4.ComposeTestRule
 import androidx.test.core.app.ApplicationProvider
 import com.example.android.architecture.blueprints.todoapp.R
 import io.github.kakaocup.compose.node.element.ComposeScreen
 import io.github.kakaocup.compose.node.element.KNode
+import utils.TestTags
+
+private val targetContext: Context = ApplicationProvider.getApplicationContext<Context>()
 
 class TasksScreen(semanticsProvider: SemanticsNodeInteractionsProvider) :
     ComposeScreen<TasksScreen>(
         semanticsProvider = semanticsProvider
     ) {
-    private val targetContext: Context = ApplicationProvider.getApplicationContext<Context>()
 
-    val addTaskButton: KNode = child {
-        hasContentDescription(this@TasksScreen.targetContext.resources.getString(R.string.add_task))
+    private val composeTestRule = semanticsProvider as ComposeTestRule
+
+    private val addTaskButton: KNode = child {
+        hasContentDescription(targetContext.resources.getString(R.string.add_task))
     }
 
-    fun getTaskWithText(title: String): KNode {
+    private fun getTaskWithText(title: String): KNode {
         return child { hasText(title) }
     }
 
-    val checkboxButton: KNode = child {
-        hasTestTag("checkbox_button")
+    private val checkboxButton: KNode = child {
+        hasTestTag(TestTags.CheckBoxButton)
     }
 
-    val moreMenuButton: KNode = child {
-        hasTestTag("more_menu")
+    private val moreMenuButton: KNode = child {
+        hasTestTag(TestTags.MoreMenuButton)
     }
 
-    val clearCompletedButton: KNode = child {
-        hasText(this@TasksScreen.targetContext.resources.getString(R.string.menu_clear))
+    private val clearCompletedButton: KNode = child {
+        hasText(targetContext.resources.getString(R.string.menu_clear))
     }
 
-    val noTasksImage: KNode = child {
-        hasContentDescription(this@TasksScreen.targetContext.resources.getString(R.string.no_tasks_image_content_description))
+    private val noTasksImage: KNode = child {
+        hasContentDescription(targetContext.resources.getString(R.string.no_tasks_image_content_description))
+    }
+
+    fun openAddNewTask() {
+        onComposeScreen<TasksScreen>(composeTestRule) {
+            addTaskButton {
+                performClick()
+            }
+        }
+    }
+
+    fun assertTaskIsDisplayed(title: String) {
+        onComposeScreen<TasksScreen>(composeTestRule) {
+            getTaskWithText(title).assertIsDisplayed()
+        }
+    }
+
+    fun assertTaskIsNotDisplayed(title: String) {
+        onComposeScreen<TasksScreen>(composeTestRule) {
+            getTaskWithText(title).assertDoesNotExist()
+        }
     }
 }

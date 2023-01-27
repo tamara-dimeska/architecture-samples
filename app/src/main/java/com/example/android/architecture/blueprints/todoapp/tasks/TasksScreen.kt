@@ -195,7 +195,7 @@ private fun TaskItem(
         Checkbox(
             checked = task.isCompleted,
             onCheckedChange = onCheckedChange,
-            modifier = Modifier.semantics { testTag = "checkbox_button" }
+            modifier = Modifier.semantics { testTag = "checkbox-button" }
         )
         Text(
             text = task.titleForList,
