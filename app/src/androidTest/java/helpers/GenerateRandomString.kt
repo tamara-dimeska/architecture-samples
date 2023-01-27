@@ -1,9 +1,7 @@
 package helpers
 
-// Source: https://stackoverflow.com/a/54400933
-fun generateRandomString(length: Int) : String {
-    val allowedChars = ('A'..'Z') + ('a'..'z') + ('0'..'9')
-    return (1..length)
-        .map { allowedChars.random() }
-        .joinToString("")
-}
+import  kotlin.random.Random
+
+fun generateRandomString(length: Int = 4): String = List(length) {
+    (('a'..'z') + ('A'..'Z') + ('0'..'9')).random(Random(System.currentTimeMillis()))
+}.joinToString("")
