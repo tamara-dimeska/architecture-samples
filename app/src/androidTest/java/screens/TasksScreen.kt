@@ -2,8 +2,6 @@ package screens
 
 import android.content.Context
 import androidx.compose.ui.test.SemanticsNodeInteractionsProvider
-import androidx.compose.ui.test.hasContentDescription
-import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.ComposeTestRule
 import androidx.test.core.app.ApplicationProvider
 import com.example.android.architecture.blueprints.todoapp.R
@@ -32,14 +30,6 @@ class TasksScreen(semanticsProvider: SemanticsNodeInteractionsProvider) :
         hasTestTag(TestTags.CheckBoxButton)
     }
 
-    private val moreMenuButton: KNode = child {
-        hasTestTag(TestTags.MoreMenuButton)
-    }
-
-    private val clearCompletedButton: KNode = child {
-        hasText(targetContext.resources.getString(R.string.menu_clear))
-    }
-
     private val noTasksImage: KNode = child {
         hasContentDescription(targetContext.resources.getString(R.string.no_tasks_image_content_description))
     }
@@ -47,6 +37,14 @@ class TasksScreen(semanticsProvider: SemanticsNodeInteractionsProvider) :
     fun openAddNewTask() {
         onComposeScreen<TasksScreen>(composeTestRule) {
             addTaskButton {
+                performClick()
+            }
+        }
+    }
+
+    fun tapOnCheckbox() {
+        onComposeScreen<TasksScreen>(composeTestRule) {
+            checkboxButton {
                 performClick()
             }
         }
@@ -61,6 +59,22 @@ class TasksScreen(semanticsProvider: SemanticsNodeInteractionsProvider) :
     fun assertTaskIsNotDisplayed(title: String) {
         onComposeScreen<TasksScreen>(composeTestRule) {
             getTaskWithText(title).assertDoesNotExist()
+        }
+    }
+
+    fun assertTaskIsMarkedAsComplete() {
+        onComposeScreen<TasksScreen>(composeTestRule) {
+            checkboxButton {
+                assertIsOn()
+            }
+        }
+    }
+
+    fun assertTaskIsMarkedAsActive() {
+        onComposeScreen<TasksScreen>(composeTestRule) {
+            checkboxButton {
+                assertIsOff()
+            }
         }
     }
 }

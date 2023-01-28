@@ -108,7 +108,6 @@ private fun MoreTasksMenu(
 //            Icon()
             Icon(
                 imageVector = Icons.Filled.MoreVert, stringResource(id = R.string.menu_more),
-                modifier = Modifier.semantics { testTag = "more-menu-button" }
             )
         }
     ) { closeMenu ->

@@ -10,7 +10,7 @@ class AddNewTaskUITests : UITestCase() {
     private val newTaskScreen = NewTaskScreen(composeTestRule)
 
     @Test
-    fun test_successfully_adding_a_task() = run {
+    fun test_successfully_adding_a_task() {
         val randomString = generateRandomString()
         val title = "Add new task UI test $randomString"
 
@@ -23,7 +23,7 @@ class AddNewTaskUITests : UITestCase() {
     }
 
     @Test
-    fun test_error_message_is_displayed_when_title_body_are_missing() = run {
+    fun test_error_message_is_displayed_when_title_body_are_missing() {
         val randomString = generateRandomString()
         val title = "Add new task UI test $randomString with error message"
 
