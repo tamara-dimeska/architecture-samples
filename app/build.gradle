@@ -192,5 +192,5 @@ dependencies {
     androidTestImplementation "com.kaspersky.android-components:kaspresso:$kaspressoVerion"
     androidTestImplementation "com.kaspersky.android-components:kaspresso-compose-support:$kaspressoVerion"
     androidTestImplementation "androidx.test:runner:$androidXTestRunnerVersion"
-    androidTestUtil("androidx.test:orchestrator:1.4.2")
+    androidTestUtil("androidx.test:orchestrator:$androidTestOrchestratorVersion")
 }

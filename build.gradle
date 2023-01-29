@@ -57,6 +57,7 @@ ext {
     // App dependencies
     accompanistVersion = '0.23.0'
     activityComposeVersion = '1.4.0'
+    androidTestOrchestratorVersion = '1.4.2'
     androidXVersion = '1.0.0'
     androidXTestCoreVersion = '1.4.1-alpha06'
     androidXTestExtKotlinRunnerVersion = '1.1.4-alpha06'
