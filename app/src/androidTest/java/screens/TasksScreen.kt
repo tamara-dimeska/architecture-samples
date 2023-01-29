@@ -27,7 +27,7 @@ class TasksScreen(semanticsProvider: SemanticsNodeInteractionsProvider) :
     }
 
     private val checkboxButton: KNode = child {
-        hasTestTag(TestTags.CheckBoxButton)
+        hasTestTag("checkbox-button")
     }
 
     private val noTasksImage: KNode = child {
