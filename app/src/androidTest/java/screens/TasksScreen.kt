@@ -7,7 +7,6 @@ import androidx.test.core.app.ApplicationProvider
 import com.example.android.architecture.blueprints.todoapp.R
 import io.github.kakaocup.compose.node.element.ComposeScreen
 import io.github.kakaocup.compose.node.element.KNode
-import utils.TestTags
 
 private val targetContext: Context = ApplicationProvider.getApplicationContext<Context>()
 
