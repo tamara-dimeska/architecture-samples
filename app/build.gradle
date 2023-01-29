@@ -190,4 +190,7 @@ dependencies {
 
     //UI tests
     androidTestUtil("androidx.test:orchestrator:$androidTestOrchestratorVersion")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:$composeVersion")
+    androidTestImplementation("androidx.test:runner:$androidXTestRunnerVersion")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:$composeVersion")
 }
