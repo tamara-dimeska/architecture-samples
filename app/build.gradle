@@ -13,7 +13,9 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "com.example.android.architecture.blueprints.todoapp.CustomTestRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArguments["clearPackageData"] = "true"
+        testInstrumentationRunnerArguments["functionalTest"] = "true"
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -62,6 +64,10 @@ android {
         }
     }
 
+    testOptions {
+        execution = "ANDROIDX_TEST_ORCHESTRATOR"
+    }
+
     buildFeatures {
         compose true
     }
@@ -82,6 +88,13 @@ android {
 
     composeOptions {
         kotlinCompilerExtensionVersion "$composeCompilerVersion"
+    }
+
+    task wrapper(type: Wrapper){
+        gradleVersion = '7.2'
+    }
+
+    task prepareKotlinBuildScriptModel {
     }
 }
 
@@ -174,4 +187,7 @@ dependencies {
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+
+    //UI tests
+    androidTestUtil("androidx.test:orchestrator:$androidTestOrchestratorVersion")
 }
