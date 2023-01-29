@@ -6,6 +6,8 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsOff
 import androidx.compose.ui.test.assertIsOn
 import androidx.compose.ui.test.junit4.ComposeTestRule
+import androidx.compose.ui.test.onAllNodesWithTag
+import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
@@ -32,8 +34,8 @@ class TasksScreenRobot(semanticsProvider: SemanticsNodeInteractionsProvider) :
         composeTestRule.onNodeWithContentDescription(addTaskButton).performClick()
     }
 
-    fun tapOnCheckbox() {
-        composeTestRule.onNodeWithTag(checkboxButton).performClick()
+    fun tapOnFirstCheckbox() {
+        composeTestRule.onAllNodesWithTag(checkboxButton).onFirst().performClick()
     }
 
     fun assertTaskIsDisplayed(title: String) {
