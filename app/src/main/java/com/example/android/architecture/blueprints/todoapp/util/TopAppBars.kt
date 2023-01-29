@@ -105,7 +105,6 @@ private fun MoreTasksMenu(
 ) {
     TopAppBarDropdownMenu(
         iconContent = {
-//            Icon()
             Icon(
                 imageVector = Icons.Filled.MoreVert, stringResource(id = R.string.menu_more),
             )
